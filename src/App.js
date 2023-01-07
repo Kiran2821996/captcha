@@ -7,7 +7,7 @@ function App() {
     password: "",
     passwordConfirmation: "",
   });
- 
+
   const [errors, setErrors] = useState({});
   const validate = () => {
     const newErrors = {};
@@ -44,7 +44,6 @@ function App() {
       [name]: value,
     }));
   };
-
 
   // Use useRef to get a reference to the canvas element
   const canvasRef = useRef(null);
@@ -140,9 +139,11 @@ function App() {
         />
         {errors.passwordConfirmation && <p>{errors.passwordConfirmation}</p>}
       </label>
-      <canvas ref={canvasRef} width="200" height="50" />
       <br />
       <label htmlFor="captcha">Enter the solution to the CAPTCHA:</label>
+      <div>
+        <canvas ref={canvasRef} width="200" height="50" />
+      </div>
       <input type="text" name="captcha" />
       <br />
       <button type="submit">Sign Up</button>
