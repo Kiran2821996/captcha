@@ -48,12 +48,18 @@ function App() {
   // Use useRef to get a reference to the canvas element
   const canvasRef = useRef(null);
 
-  // Generate a random solution to the CAPTCHA
-  const captchaSolution = Math.random().toString(36).substring(7);
+ // Use useState to track the current solution to the CAPTCHA
+ const [captchaSolution, setCaptchaSolution] = useState(Math.random().toString(36).substring(7));
+  const handleReload=()=>{
+    setCaptchaSolution(Math.random().toString(36).substring(7))
+  }
 
   useEffect(() => {
     // Get the canvas context
-    const context = canvasRef.current.getContext("2d");
+    const context = canvasRef.current.getContext('2d');
+
+    // Clear the canvas
+    context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
     // Draw the solution on the canvas
     context.font = "24px sans-serif";
@@ -72,7 +78,7 @@ function App() {
       );
       context.stroke();
     }
-  }, []);
+  }, [captchaSolution]);
 
   // submit the form
   function handleSubmit(event) {
@@ -86,7 +92,8 @@ function App() {
       // Check if the user's solution is correct
       if (captcha === captchaSolution) {
         // The CAPTCHA was solved correctly, so we can submit the form
-        event.target.submit();
+        window.location.reload()
+        alert("Form submitted Succesfully");
       } else {
         // The CAPTCHA was not solved correctly, so display an error message
         alert("The CAPTCHA was not solved correctly. Please try again.");
@@ -143,6 +150,7 @@ function App() {
       <label htmlFor="captcha">Enter the solution to the CAPTCHA:</label>
       <div>
         <canvas ref={canvasRef} width="200" height="50" />
+        <h6 onClick={handleReload} >Reload</h6>
       </div>
       <input type="text" name="captcha" />
       <br />
