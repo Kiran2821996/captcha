@@ -9,6 +9,7 @@ function App() {
     password: "",
     passwordConfirmation: "",
   });
+  const [toggle,setToggle]=useState(false)
 
   const [errors, setErrors] = useState({});
   const validate = () => {
@@ -46,6 +47,10 @@ function App() {
       [name]: value,
     }));
   };
+
+  const handleToggle=()=>{
+    setToggle(!toggle)
+  }
 
   // Use useRef to get a reference to the canvas element
   const canvasRef = useRef(null);
@@ -106,7 +111,23 @@ function App() {
   }
 
   return (
-    <div className="main_div">
+    <>
+   
+    <div className={toggle?"main_div_light_mode":"main_div_dark_mode"}>
+
+    <div onClick={handleToggle} className="toggle">
+    <div class="toggle-button-cover">
+      <div class="button-cover">
+        <div class="button b2" id="button-10">
+          <input type="checkbox" class="checkbox" />
+          <div class="knobs">
+            <span>DARK</span>
+          </div>
+          <div class="layer"></div>
+        </div>
+      </div>
+    </div>
+    </div>
       <div>
         <h4>BLACK MONTHLY EXIBIT "FEB 2023</h4>
         <img src={backimage} alt="img" width={300} />
@@ -168,13 +189,14 @@ function App() {
         </div>
         <input type="text" name="captcha" placeholder="Captcha" />
         <br />
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="sign_up">Sign Up</button>
       </form>
       </div>
      
       
      
-    </div>
+    </div></>
+    
   );
 }
 
