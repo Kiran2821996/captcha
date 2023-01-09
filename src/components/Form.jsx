@@ -97,15 +97,20 @@ function Form() {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
+     
       // Check if the user's solution is correct
       if (captcha === captchaSolution) {
-        // The CAPTCHA was solved correctly, so we can submit the form
         window.location.reload();
+        // The CAPTCHA was solved correctly, so we can submit the form
         alert("Form submitted Succesfully");
       } else {
+        handleReload()
+        setErrors({});
         // The CAPTCHA was not solved correctly, so display an error message
         alert("The CAPTCHA was not solved correctly. Please try again.");
       }
+    }else{
+      handleReload()
     }
   }
 
