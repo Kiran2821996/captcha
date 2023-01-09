@@ -1,4 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
+import backimage from "./images/bg_img.png";
+import "./App.css";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -48,15 +50,17 @@ function App() {
   // Use useRef to get a reference to the canvas element
   const canvasRef = useRef(null);
 
- // Use useState to track the current solution to the CAPTCHA
- const [captchaSolution, setCaptchaSolution] = useState(Math.random().toString(36).substring(7));
-  const handleReload=()=>{
-    setCaptchaSolution(Math.random().toString(36).substring(7))
-  }
+  // Use useState to track the current solution to the CAPTCHA
+  const [captchaSolution, setCaptchaSolution] = useState(
+    Math.random().toString(36).substring(7)
+  );
+  const handleReload = () => {
+    setCaptchaSolution(Math.random().toString(36).substring(7));
+  };
 
   useEffect(() => {
     // Get the canvas context
-    const context = canvasRef.current.getContext('2d');
+    const context = canvasRef.current.getContext("2d");
 
     // Clear the canvas
     context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
@@ -92,7 +96,7 @@ function App() {
       // Check if the user's solution is correct
       if (captcha === captchaSolution) {
         // The CAPTCHA was solved correctly, so we can submit the form
-        window.location.reload()
+        window.location.reload();
         alert("Form submitted Succesfully");
       } else {
         // The CAPTCHA was not solved correctly, so display an error message
@@ -102,60 +106,75 @@ function App() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="name">
-        Name:
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-        />
-        {errors.name && <p>{errors.name}</p>}
-      </label>
-      <br />
-      <label htmlFor="email">
-        Email:
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-        {errors.email && <p>{errors.email}</p>}
-      </label>
-      <br />
-      <label htmlFor="password">
-        Password:
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        {errors.password && <p>{errors.password}</p>}
-      </label>
-      <br />
-      <label htmlFor="passwordConfirmation">
-        Confirm Password:
-        <input
-          type="password"
-          name="passwordConfirmation"
-          value={formData.passwordConfirmation}
-          onChange={handleChange}
-        />
-        {errors.passwordConfirmation && <p>{errors.passwordConfirmation}</p>}
-      </label>
-      <br />
-      <label htmlFor="captcha">Enter the solution to the CAPTCHA:</label>
+    <div className="main_div">
       <div>
-        <canvas ref={canvasRef} width="200" height="50" />
-        <h6 onClick={handleReload} >Reload</h6>
+        <h4>BLACK MONTHLY EXIBIT "FEB 2023</h4>
+        <img src={backimage} alt="img" width={300} />
       </div>
-      <input type="text" name="captcha" />
-      <br />
-      <button type="submit">Sign Up</button>
-    </form>
+      <div>
+      <h5>Sign up for monthly newsletter</h5>
+      <form onSubmit={handleSubmit}>
+      
+        <label htmlFor="name">
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={formData.name}
+            onChange={handleChange}
+          />
+          {errors.name && <p>{errors.name}</p>}
+        </label>
+        <br />
+        <label htmlFor="email">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          {errors.email && <p>{errors.email}</p>}
+        </label>
+        <br />
+        <label htmlFor="password">
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+          {errors.password && <p>{errors.password}</p>}
+        </label>
+        <br />
+        <label htmlFor="passwordConfirmation">
+          <input
+            type="password"
+            name="passwordConfirmation"
+            placeholder="Confirm Password"
+            value={formData.passwordConfirmation}
+            onChange={handleChange}
+          />
+          {errors.passwordConfirmation && <p>{errors.passwordConfirmation}</p>}
+        </label>
+        <br />
+        <div className="captcha">
+          <div>
+          <canvas ref={canvasRef} width="200" height="50" />
+          </div>
+          
+          <h3 onClick={handleReload}>⟳</h3>
+        </div>
+        <input type="text" name="captcha" placeholder="Captcha" />
+        <br />
+        <button type="submit">Sign Up</button>
+      </form>
+      </div>
+     
+      
+     
+    </div>
   );
 }
 
