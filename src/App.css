@@ -4,7 +4,7 @@
   justify-content: space-evenly;
   align-items: center;
   padding: 2%;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(252,235,235);
   color: rgb(0, 0, 0);
 
 }
@@ -36,7 +36,7 @@ canvas {
 }
 form {
   height:fit-content;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0.539);
   border-radius: 10px;
   backdrop-filter: blur(10px);
   border: 2px solid rgb(107, 106, 106);
@@ -81,7 +81,7 @@ input {
 }
 .sign_up{
   width: 108%;
-  background-color: #ffd000;
+  background-color: rgb(253,148,0);
   color: #080710;
   padding: 15px 0;
   font-size: 18px;
